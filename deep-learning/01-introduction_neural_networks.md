@@ -1,6 +1,4 @@
-# 01-introduction_neural_networks
-
-# Deep Learning Notes
+# Introduction to Neural Networks — Deep Learning Notes
 
 > Transcribed and cleaned up from handwritten notes. Equations are written in LaTeX and notation has been standardized where possible.
 > 

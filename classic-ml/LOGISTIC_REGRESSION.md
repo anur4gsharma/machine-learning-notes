@@ -4,21 +4,17 @@
 
 We want the model output to satisfy:
 
-<p align="center">
-<strong>
-h<sub>θ</sub>(x) ∈ [0, 1]
-</strong>
-</p>
+$$
+h_\theta(x) \in [0, 1]
+$$
 
 This allows the output of the model to be interpreted as a probability.
 
 The hypothesis function is:
 
-<p align="center">
-<strong>
-h<sub>θ</sub>(x) = g(θᵀx) = 1 / (1 + e<sup>−θᵀx</sup>)
-</strong>
-</p>
+$$
+h_\theta(x) = g(\theta^\top x) = \frac{1}{1 + e^{-\theta^\top x}}
+$$
 
 ---
 
@@ -26,13 +22,11 @@ h<sub>θ</sub>(x) = g(θᵀx) = 1 / (1 + e<sup>−θᵀx</sup>)
 
 The sigmoid function is:
 
-<p align="center">
-<strong>
-g(z) = 1 / (1 + e<sup>−z</sup>)
-</strong>
-</p>
+$$
+g(z) = \frac{1}{1 + e^{-z}}
+$$
 
-It maps any real-valued input to the interval `(0, 1)`.
+It maps any real-valued input to the interval $(0, 1)$.
 
 ---
 
@@ -40,61 +34,45 @@ It maps any real-valued input to the interval `(0, 1)`.
 
 For binary classification:
 
-<p align="center">
-<strong>
-y ∈ {0, 1}
-</strong>
-</p>
+$$
+y \in \{0, 1\}
+$$
 
-The probability that `y = 1` is:
+The probability that $y = 1$ is:
 
-<p align="center">
-<strong>
-P(y = 1 | x; θ) = h<sub>θ</sub>(x)
-</strong>
-</p>
+$$
+P(y = 1 \mid x;\, \theta) = h_\theta(x)
+$$
 
-The probability that `y = 0` is:
+The probability that $y = 0$ is:
 
-<p align="center">
-<strong>
-P(y = 0 | x; θ) = 1 − h<sub>θ</sub>(x)
-</strong>
-</p>
+$$
+P(y = 0 \mid x;\, \theta) = 1 - h_\theta(x)
+$$
 
 These can be combined into one expression:
 
-<p align="center">
-<strong>
-P(y | x; θ) = h<sub>θ</sub>(x)<sup>y</sup>
-(1 − h<sub>θ</sub>(x))<sup>1−y</sup>
-</strong>
-</p>
+$$
+P(y \mid x;\, \theta) = h_\theta(x)^{y} \left(1 - h_\theta(x)\right)^{1-y}
+$$
 
 ---
 
 # Maximum Likelihood Estimation
 
-Given `m` training examples, the likelihood function is:
+Given $m$ training examples, the likelihood function is:
 
-<p align="center">
-<strong>
-L(θ) = ∏<sub>i=1</sub><sup>m</sup> P(y<sup>(i)</sup> | x<sup>(i)</sup>; θ)
-</strong>
-</p>
+$$
+L(\theta) = \prod_{i=1}^{m} P\!\left(y^{(i)} \mid x^{(i)};\, \theta\right)
+$$
 
 Using the Bernoulli model:
 
-<p align="center">
-<strong>
-L(θ) =
-∏<sub>i=1</sub><sup>m</sup>
-h<sub>θ</sub>(x<sup>(i)</sup>)<sup>y<sup>(i)</sup></sup>
-(1 − h<sub>θ</sub>(x<sup>(i)</sup>))<sup>1−y<sup>(i)</sup></sup>
-</strong>
-</p>
+$$
+L(\theta) = \prod_{i=1}^{m} h_\theta\!\left(x^{(i)}\right)^{y^{(i)}} \left(1 - h_\theta\!\left(x^{(i)}\right)\right)^{1 - y^{(i)}}
+$$
 
-We choose the parameters `θ` that maximize the likelihood.
+We choose the parameters $\theta$ that maximize the likelihood.
 
 ---
 
@@ -102,27 +80,17 @@ We choose the parameters `θ` that maximize the likelihood.
 
 Taking the logarithm:
 
-<p align="center">
-<strong>
-ℓ(θ) = log L(θ)
-</strong>
-</p>
+$$
+\ell(\theta) = \log L(\theta)
+$$
 
 Therefore:
 
-<p align="center">
-<strong>
-ℓ(θ) =
-Σ<sub>i=1</sub><sup>m</sup>
-[
-y<sup>(i)</sup> log h<sub>θ</sub>(x<sup>(i)</sup>)
-+
-(1 − y<sup>(i)</sup>) log(1 − h<sub>θ</sub>(x<sup>(i)</sup>))
-]
-</strong>
-</p>
+$$
+\ell(\theta) = \sum_{i=1}^{m} \left[ y^{(i)} \log h_\theta\!\left(x^{(i)}\right) + \left(1 - y^{(i)}\right) \log\!\left(1 - h_\theta\!\left(x^{(i)}\right)\right) \right]
+$$
 
-We choose `θ` to maximize `ℓ(θ)`.
+We choose $\theta$ to maximize $\ell(\theta)$.
 
 ---
 
@@ -132,34 +100,21 @@ We choose `θ` to maximize `ℓ(θ)`.
 
 The general gradient-ascent update is:
 
-<p align="center">
-<strong>
-θ<sub>j</sub> ← θ<sub>j</sub> +
-α ∂ℓ(θ) / ∂θ<sub>j</sub>
-</strong>
-</p>
+$$
+\theta_j \leftarrow \theta_j + \alpha \frac{\partial \ell(\theta)}{\partial \theta_j}
+$$
 
 For logistic regression:
 
-<p align="center">
-<strong>
-θ<sub>j</sub> ← θ<sub>j</sub> +
-α Σ<sub>i=1</sub><sup>m</sup>
-(y<sup>(i)</sup> − h<sub>θ</sub>(x<sup>(i)</sup>))
-x<sub>j</sub><sup>(i)</sup>
-</strong>
-</p>
+$$
+\theta_j \leftarrow \theta_j + \alpha \sum_{i=1}^{m} \left(y^{(i)} - h_\theta\!\left(x^{(i)}\right)\right) x_j^{(i)}
+$$
 
 In vector form:
 
-<p align="center">
-<strong>
-θ ← θ +
-α Σ<sub>i=1</sub><sup>m</sup>
-(y<sup>(i)</sup> − h<sub>θ</sub>(x<sup>(i)</sup>))
-x<sup>(i)</sup>
-</strong>
-</p>
+$$
+\theta \leftarrow \theta + \alpha \sum_{i=1}^{m} \left(y^{(i)} - h_\theta\!\left(x^{(i)}\right)\right) x^{(i)}
+$$
 
 ---
 
@@ -169,40 +124,27 @@ Newton's method can be used to find the optimum more quickly than gradient ascen
 
 For a one-dimensional function:
 
-<p align="center">
-<strong>
-θ<sup>(t+1)</sup> =
-θ<sup>(t)</sup> −
-f′(θ<sup>(t)</sup>) / f″(θ<sup>(t)</sup>)
-</strong>
-</p>
+$$
+\theta^{(t+1)} = \theta^{(t)} - \frac{f'(\theta^{(t)})}{f''(\theta^{(t)})}
+$$
 
 For multiple parameters, the Hessian matrix is used:
 
-<p align="center">
-<strong>
-θ<sup>(t+1)</sup> =
-θ<sup>(t)</sup> −
-H<sup>−1</sup> ∇J(θ<sup>(t)</sup>)
-</strong>
-</p>
+$$
+\theta^{(t+1)} = \theta^{(t)} - H^{-1} \nabla J(\theta^{(t)})
+$$
 
 A common compact form is:
 
-<p align="center">
-<strong>
-θ ← θ − H<sup>−1</sup> ∇J(θ)
-</strong>
-</p>
+$$
+\theta \leftarrow \theta - H^{-1} \nabla J(\theta)
+$$
 
 The Hessian matrix contains second-order partial derivatives:
 
-<p align="center">
-<strong>
-H<sub>ij</sub> =
-∂²J(θ) / (∂θ<sub>i</sub> ∂θ<sub>j</sub>)
-</strong>
-</p>
+$$
+H_{ij} = \frac{\partial^2 J(\theta)}{\partial \theta_i \, \partial \theta_j}
+$$
 
 ---
 
@@ -212,7 +154,7 @@ H<sub>ij</sub> =
 | ----------------------- | ------------------------------------------------------------------ |
 | **Sigmoid**             | Converts a real number into a value between 0 and 1                |
 | **Logistic Regression** | Uses the sigmoid output as a probability                           |
-| **Maximum Likelihood**  | Chooses `θ` to maximize the probability of the training data       |
+| **Maximum Likelihood**  | Chooses $\theta$ to maximize the probability of the training data  |
 | **Log-Likelihood**      | Logarithm of the likelihood, making products easier to work with   |
-| **Gradient Ascent**     | Iteratively updates `θ` in the direction that increases likelihood |
+| **Gradient Ascent**     | Iteratively updates $\theta$ in the direction that increases likelihood |
 | **Newton's Method**     | Uses first- and second-order derivatives for faster optimization   |
