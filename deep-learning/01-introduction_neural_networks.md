@@ -70,11 +70,11 @@ $$\mathcal{L} = \frac{1}{n} \sum_{i=1}^{n} \ell_{\mathrm{CE}}\!\left(h_\theta(x^
 
 Consider the ReLU activation function:
 
-$$\operatorname{ReLU}(z) = \max\{z, 0\}.$$
+$$\text{ReLU}(z) = \max\{z, 0\}.$$
 
 A neuron computes
 
-$$h_0(x) = \operatorname{ReLU}(w^\top x + b),$$
+$$h_0(x) = \text{ReLU}(w^\top x + b),$$
 
 where
 
@@ -104,11 +104,11 @@ Suppose a layer contains $m$ neurons.
 
 For each neuron,
 
-$$a_i = \operatorname{ReLU}(w_i^\top x + b_i), \qquad i = 1, \ldots, m.$$
+$$a_i = \text{ReLU}(w_i^\top x + b_i), \qquad i = 1, \ldots, m.$$
 
 Stacking all neuron outputs into one vector gives
 
-$$a = \operatorname{ReLU}(Wx + b),$$
+$$a = \text{ReLU}(Wx + b),$$
 
 where
 
@@ -134,7 +134,7 @@ A neural network is formed by composing multiple layers.
 
 For example, a two-layer network can be written as
 
-$$a = \operatorname{ReLU}(W^{[1]}x + b^{[1]}),$$
+$$a = \text{ReLU}(W^{[1]}x + b^{[1]}),$$
 
 followed by
 
@@ -142,7 +142,7 @@ $$h_\theta(x) = W^{[2]}a + b^{[2]}.$$
 
 Combining them,
 
-$$h_\theta(x) = W^{[2]} \operatorname{ReLU}\!\left(W^{[1]}x + b^{[1]}\right) + b^{[2]}.$$
+$$h_\theta(x) = W^{[2]} \text{ReLU}\!\left(W^{[1]}x + b^{[1]}\right) + b^{[2]}.$$
 
 The superscript $[l]$ denotes the layer number.
 
@@ -168,11 +168,11 @@ A residual connection (or **skip connection**) adds the input of a block directl
 
 Suppose a normal network block computes some transformation $F(z)$:
 
-$$F(z) = \operatorname{ReLU}\!\left(W_2 \operatorname{ReLU}(W_1 z + b_1) + b_2\right).$$
+$$F(z) = \text{ReLU}\!\left(W_2 \text{ReLU}(W_1 z + b_1) + b_2\right).$$
 
 A residual block instead computes something of the form
 
-$$\operatorname{ReLU}(F(z) + z).$$
+$$\text{ReLU}(F(z) + z).$$
 
 The direct $z$ term is the **skip connection**.
 
@@ -198,7 +198,7 @@ $$y = F(z) + z$$
 
 or, with an activation after the addition,
 
-$$y = \operatorname{ReLU}(F(z) + z).$$
+$$y = \text{ReLU}(F(z) + z).$$
 
 The residual branch learns the difference between the desired output and the input.
 
